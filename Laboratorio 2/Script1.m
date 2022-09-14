@@ -11,4 +11,5 @@ send(velPub,velMsg); %Envío
 pause(1)
 
 %% Sucripción al tópico de pose
-poseSub = rossubscriber("/turtle1/pose",)
+poseSub = rossubscriber("/turtle1/pose",'turtlesim/Pose'); %Creación del suscriptor
+poseMsg = poseSub.LatestMessage %Obtención del último mensaje del tópico PoseS

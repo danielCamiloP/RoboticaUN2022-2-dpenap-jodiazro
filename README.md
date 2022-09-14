@@ -9,6 +9,5 @@ Para poder ver el desarrollo de los laboratorios, lo invitamos a dirijirse a la 
 Todo el trabajo consignado en este repositorio fue realizado en conjunto por
 #### Johan Andrés Díaz Roa
 #### Daniel Camilo Peña Pabón
-Estudiantes de Ingeniería Mecatrónica
-Universidad Nacional Sede Bogotá
+Estudiantes de Ingeniería Mecatrónica de la Universidad Nacional de Colombia, Sede Bogotá
 Semestre 2022-2

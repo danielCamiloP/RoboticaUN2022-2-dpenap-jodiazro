@@ -13,3 +13,10 @@ pause(1)
 %% Sucripción al tópico de pose
 poseSub = rossubscriber("/turtle1/pose",'turtlesim/Pose'); %Creación del suscriptor
 poseMsg = poseSub.LatestMessage %Obtención del último mensaje del tópico PoseS
+
+%% Envío de valores asociados a la pose de turtle1
+
+
+%% Finalización del nodo maestro de ROS
+%Consultando la documentación de ROSToolbox, se debe ejecutar
+rosshutdown;

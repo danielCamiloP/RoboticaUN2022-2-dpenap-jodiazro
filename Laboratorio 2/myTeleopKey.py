@@ -40,7 +40,7 @@ def pubVel(vel_x, ang_z, t):
 #     while rospy.Time.now() < endTime:wa
 #         pub.publish(vel) #envio del mensaje
 
-ts = 1
+ts = 0.1
 
 def on_press(key): #on_press detecta cualquier tecla presionada
     if key == KeyCode.from_char('w'): #si la tecla fue w
@@ -70,12 +70,11 @@ def on_press(key): #on_press detecta cualquier tecla presionada
     #     pubVel(0,0,0.1)#colocar cmd_vel en ceros
 
 def on_release(key): #detecta si se soltó alguna tecla
-    print("Saliendo")
     if key == Key.esc: #tecla esc presionada
         return False #salir del programa
 
 if __name__ == '__main__': #manejo de interrupciones dentro de ROS
-    pubVel(0,0,0.1) #mantiene tiempo en simulación
+    pubVel(0,0,ts) #mantiene tiempo en simulación
     try:
         with Listener(on_press=on_press, on_release=on_release) as listener:
             listener.join()

@@ -12,9 +12,17 @@ pause(1)
 
 %% Sucripción al tópico de pose
 poseSub = rossubscriber("/turtle1/pose",'turtlesim/Pose'); %Creación del suscriptor
-poseMsg = poseSub.LatestMessage %Obtención del último mensaje del tópico PoseS
-
+poseMsg = poseSub.LatestMessage; %Obtención del último mensaje del tópico PoseS
 %% Envío de valores asociados a la pose de turtle1
+%Para poder modificar la pose de la tortuga de manera directa, se deben
+%emplear servicios, como lo indica la wiki de ros http://wiki.ros.org/turtlesim
+%Hay dos maneras de cambiar la pose. El servicio teleport_absolute y
+%teleport_relative. Como se indica en el nombre, uno permite emplear
+%coordenadas absolutas mientras el otro permite usar coordenadas relativas.
+
+%ejemplo con coordenadas absolutas
+
+%ejemplo con coordenadas relativas
 
 
 %% Finalización del nodo maestro de ROS

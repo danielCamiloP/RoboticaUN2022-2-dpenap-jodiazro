@@ -80,3 +80,22 @@ if __name__ == '__main__': #manejo de interrupciones dentro de ROS
             listener.join()
     except rospy.ROSInterruptException:
         pass
+
+'''    
+def teleport(x, y, ang):
+    rospy.wait_for_service('/turtle1/teleport_absolute')
+    try:
+        teleportA = rospy.ServiceProxy('/turtle1/teleport_absolute', TeleportAbsolute)
+        resp1 = teleportA(x, y, ang)
+        print('Teleported to x: {}, y: {}, ang: {}'.format(str(x),str(y),str(ang)))
+    except rospy.ServiceException as e:
+        print(str(e))
+def teleportRel(x,ang):
+    rospy.wait_for_service('/turtle1/teleport_relative')
+    try:
+        teleportR = rospy.ServiceProxy('/turtle1/teleport_relative', TeleportRelative)
+        resp1 = teleportR(x, ang)
+        
+    except rospy.ServiceException:
+        pass
+'''    

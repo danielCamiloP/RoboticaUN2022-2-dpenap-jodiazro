@@ -1,6 +1,6 @@
 # Comentarios realizados para entender mejor el codigo
 
-from pynput.keyboard import Key, Listener, KeyCode #libreria para leer input del teclado
+from pynput.keyboard import Key, Listener #libreria para leer input del teclado
 import rospy #libreria de ros para python
 from geometry_msgs.msg import Twist #permite crear mensajes de tipo Twist
 

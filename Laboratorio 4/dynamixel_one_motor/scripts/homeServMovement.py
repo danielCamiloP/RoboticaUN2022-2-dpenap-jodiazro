@@ -41,7 +41,7 @@ jointCommand('', 3, 'Torque_Limit', 400, 0)
 jointCommand('', 4, 'Torque_Limit', 400, 0)
 jointCommand('', 5, 'Torque_Limit', 400, 0)
 
-cycleNumber = 2;
+cycleNumber = 2
 
 while(cycleNumber>0):
     # Home Position

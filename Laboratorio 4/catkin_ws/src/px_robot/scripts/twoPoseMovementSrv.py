@@ -5,7 +5,7 @@ from cmath import pi
 
 # import joint_Pub
 from jointSrv import jointCommand
-from pubMovement import joint_publisher
+from jointPub import joint_publisher
 import rospy
 import time
 from math import ceil

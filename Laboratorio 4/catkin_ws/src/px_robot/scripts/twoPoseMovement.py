@@ -6,7 +6,6 @@ from std_msgs.msg import String
 from sensor_msgs.msg import JointState
 from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 
-
 def joint_publisher():
     pub = rospy.Publisher('/joint_trajectory', JointTrajectory, queue_size=0)
     rospy.init_node('joint_publisher', anonymous=False)
@@ -24,6 +23,21 @@ def joint_publisher():
             key=' '
         elif key == 'h':
             aux= point.positions = [0,0,-pi/2,0,0]
+            key=' '
+        elif key == 'q': #pos 1 0 0 0 0 0
+            aux= point.positions = [0,0,0,0,0]
+            key=' '
+        elif key == 'w': #pos 2 -20 20 -20 20 0
+            aux= point.positions = [-20*pi/180,20*pi/180,-20*pi/180,20*pi/180,0]
+            key=' '
+        elif key == 'e': #pos 3 30 -30 30 -30 0
+            aux= point.positions = [30*pi/180,-30*pi/180,30*pi/180,-30*pi/180,0]
+            key=' '
+        elif key == 'r': #pos 4 -90 15 -55 17 0
+            aux= point.positions = [-90*pi/180,15*pi/180,-55*pi/180,17*pi/180,0]
+            key=' '
+        elif key == 't': #pos 5 -90 45 -55 45 10
+            aux= point.positions = [-90*pi/180,45*pi/180,-55*pi/180,45*pi/180,10*pi/180]
             key=' '
 
         point.positions = aux

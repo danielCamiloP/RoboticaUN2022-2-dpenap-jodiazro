@@ -27,6 +27,6 @@ q = pi/180*[0 0 0 0;
      -45 45 45 45;
      0 0 -90 0;];
 
-elem=4; %Se selecciona que posición se desea graficar.
+elem=7; %Se selecciona que posición se desea graficar.
 %figure;
 R.plot(q(elem,:),'noa')

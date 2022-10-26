@@ -1,0 +1,46 @@
+Argumentos para cada funcion:
+Para pincher 1 - Pinza hacia abajo
+
+
+## Codigo para robot dibujante
+# Rutinas
+# Tecla L - Tomar o dejar el marcador en la base
+# Tecla Q - Dibujar espacio de trabajo (Diestro)
+# Tecla W - Dibujar Iniciales
+# Tecla E - Dibujar Figuras geometricas (triangulo equilatero, circulo, 3 rectas paralelas)
+# Tecla R - Dibujar puntos equidistantes (5 Puntos)
+# Tecla T - Dibujar un mongo
+
+Pinza cerrada:
+    q5 170
+Pinza abierta:
+    q5     
+
+Marcador en Base: Pendiente
+    q1 252
+    q2 314
+    q3 188
+    q4 758
+
+Marcador arriba de base-pos reposo: Pendiente
+    q1 252
+    q2 372
+    q3 178
+    q4 709
+
+Espacio diestro:
+Primer arco: (valores en analogico)
+    q1 905 - 130
+    q2 253
+    q3 167
+    q4 830
+
+
+Segundo arco:
+    q1 230 - 795
+    q2 166
+    q3 449
+    q4 611
+
+
+Figuras: Parametrizar por IKINE

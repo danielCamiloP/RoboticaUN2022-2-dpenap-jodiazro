@@ -14,8 +14,8 @@ Para pincher 1 - Pinza hacia abajo
 Pinza cerrada:
     q5 170
 Pinza abierta:
-    q5     
-
+    q5 280
+    
 Marcador en Base: Pendiente
     q1 252
     q2 314

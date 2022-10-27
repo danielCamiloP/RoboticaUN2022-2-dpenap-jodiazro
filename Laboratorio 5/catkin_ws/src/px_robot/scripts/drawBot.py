@@ -132,4 +132,12 @@ def drawSus():
     print('published command')
     rospy.sleep(1)
     
-
+def mapAngle(analogVal):
+    #512 - 0
+    #820 - +pi
+    #204 - -pi
+    m = pi/(512-204)
+    b = pi-m*820
+    radVal = analogVal*m + b
+    
+    return radVal

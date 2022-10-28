@@ -1,0 +1,5 @@
+https://all3dp.com/2/dxf-to-gcode-convert-files/#:~:text=Open%20the%20File%20menu%20in%20the%20top%2Dleft%20corner%2C%20then,button%20with%20%E2%80%9CSave%20GCode%E2%80%9D.
+
+Instalador:
+
+https://sourceforge.net/projects/dxf2gcode/

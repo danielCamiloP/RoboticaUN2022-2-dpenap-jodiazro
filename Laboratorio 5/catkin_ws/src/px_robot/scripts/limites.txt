@@ -30,7 +30,7 @@ Marcador arriba de base-pos reposo: Pendiente
 
 Espacio diestro:
 Primer arco: (valores en analogico)
-    q1 905 - 130
+    q1 130 - 905
     q2 253
     q3 167
     q4 830

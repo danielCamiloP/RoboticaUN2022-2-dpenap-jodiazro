@@ -26,79 +26,18 @@ loose = -1.1832
 z_up = 120.8719
 z_down = 33.3882
 
-while not rospy.is_shutdown():
-    key=input()
-
-    state = JointTrajectory()
-    state.header.stamp = rospy.Time.now()
-    state.joint_names = ["joint_1", "joint_2", "joint_3", "joint_4", "joint_5"]
-    point = JointTrajectoryPoint()
-
-    goRest()
-    if loaded:
-        if key == 'l':
-            leaveMarker()
-            key=' '
-        elif key == 'q': #pos 1 0 0 0 0 0
-            aux= point.positions = [0,0,0,0,0]
-            key=' '
-        elif key == 'w': #pos 2 -20 20 -20 20 0
-            aux= point.positions = [-20*pi/180,20*pi/180,-20*pi/180,20*pi/180,0]
-            key=' '
-        elif key == 'e': #pos 3 30 -30 30 -30 0
-            aux= point.positions = [30*pi/180,-30*pi/180,30*pi/180,-30*pi/180,0]
-            key=' '
-        elif key == 'r': #pos 4 -90 15 -55 17 0
-            aux= point.positions = [-90*pi/180,15*pi/180,-55*pi/180,17*pi/180,0]
-            key=' '
-        elif key == 't': #pos 5 -90 45 -55 45 10
-            aux= point.positions = [-90*pi/180,45*pi/180,-55*pi/180,45*pi/180,10*pi/180]
-            key=' '
-
-    point.positions = aux
-    point.time_from_start = rospy.Duration(0.5)
-    state.points.append(point)
-    pub.publish(state)
-    print('published command')
-    rospy.sleep(1)
-
-    state = JointTrajectory()
-    state.header.stamp = rospy.Time.now()
-    state.joint_names = ["joint_1", "joint_2", "joint_3", "joint_4", "joint_5"]
-    point = JointTrajectoryPoint()
-    point.positions = [0.25, 0, 0, 0, 1.3]    
-    point.time_from_start = rospy.Duration(0.5)
-    state.points.append(point)
-    pub.publish(state)
-    print('published command')
-    rospy.sleep(1)
+grab = False
 
 def goRest():
-    aux= point.positions = [0,0,-pi/2,0,0]
-    point.positions = aux
-    point.time_from_start = rospy.Duration(0.5)
-    state.points.append(point)
-    pub.publish(state)
-    print('published command')
-    rospy.sleep(1)
+    move(-1.32599689924245,-0.724198306509335,-1.6932,1.0098,-1.7442)
 
 def takeMarker():
-    aux= point.positions = [0,0,-pi/2,0,0]
-    point.positions = aux
-    point.time_from_start = rospy.Duration(0.5)
-    state.points.append(point)
-    pub.publish(state)
-    print('published command')
-    rospy.sleep(1)
+    move(-1.32599689924245,-1.00469765057985,-1.6422,1.2648,loose)
+    move(-1.32599689924245,-1.00469765057985,-1.6422,1.2648,grip)
 
 def leaveMarker():
-    aux= point.positions = [0,0,-pi/2,0,0]
-    point.positions = aux
-    point.time_from_start = rospy.Duration(0.5)
-    state.points.append(point)
-    pub.publish(state)
-    print('published command')
-    rospy.sleep(1)
+    move(-1.32599689924245,-1.00469765057985,-1.6422,1.2648,grip)
+    move(-1.32599689924245,-1.00469765057985,-1.6422,1.2648,loose)
 
 
 
@@ -260,6 +199,10 @@ def drawSus():
         move(q[0,j],q[1,j],q[2,j],q[3,j],grip)
     
 def move(q1,q2,q3,q4,q5):
+    state = JointTrajectory()
+    state.header.stamp = rospy.Time.now()
+    state.joint_names = ["joint_1", "joint_2", "joint_3", "joint_4", "joint_5"]
+    point = JointTrajectoryPoint()
     aux= point.positions = [q1,q2,q3,q4,q5]
     point.positions = aux
     point.time_from_start = rospy.Duration(0.5)
@@ -277,3 +220,60 @@ def mapAngle(analogVal):
     radVal = analogVal*m + b
     
     return radVal
+
+while not rospy.is_shutdown():
+    key=input()
+
+    """ state = JointTrajectory()
+    state.header.stamp = rospy.Time.now()
+    state.joint_names = ["joint_1", "joint_2", "joint_3", "joint_4", "joint_5"]
+    point = JointTrajectoryPoint() """
+
+    
+    if loaded:
+        if key == 'l':
+            if grab:
+                takeMarker()
+                grab = True
+            else:
+                leaveMarker()
+                grab = False
+            key=' '
+        elif key == 'q': #pos 1 0 0 0 0 0
+            move(-1.9482,-1.3362,-1.7442,1.6218,-1.7442)
+            move(1.8258,-1.3362,-1.7442,1.6218,-1.7442)
+            key=' '
+        elif key == 'w': #pos 2 -20 20 -20 20 0
+            drawInitials()
+            key=' '
+        elif key == 'e': #pos 3 30 -30 30 -30 0
+            drawShapes()
+            drawParallelLines()
+            key=' '
+        elif key == 'r': #pos 4 -90 15 -55 17 0
+            drawDots()
+            key=' '
+        elif key == 't': #pos 5 -90 45 -55 45 10
+            drawSus()
+            key=' '
+    else:
+        goRest()
+    """ point.positions = aux
+    point.time_from_start = rospy.Duration(0.5)
+    state.points.append(point)
+    pub.publish(state)
+    print('published command')
+    rospy.sleep(1)
+
+    state = JointTrajectory()
+    state.header.stamp = rospy.Time.now()
+    state.joint_names = ["joint_1", "joint_2", "joint_3", "joint_4", "joint_5"]
+    point = JointTrajectoryPoint()
+    point.positions = [0.25, 0, 0, 0, 1.3]    
+    point.time_from_start = rospy.Duration(0.5)
+    state.points.append(point)
+    pub.publish(state)
+    print('published command')
+    rospy.sleep(1) """
+
+

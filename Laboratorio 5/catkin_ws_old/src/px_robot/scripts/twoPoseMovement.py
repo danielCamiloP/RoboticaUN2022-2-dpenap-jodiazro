@@ -18,17 +18,17 @@ def joint_publisher():
         state.joint_names = ["joint_1", "joint_2", "joint_3", "joint_4", "joint_5"]
         point = JointTrajectoryPoint()
 
-        if key == 'f':
-            aux=[-45*pi/180,45*pi/180,45*pi/180,45*pi/180,0]
+        if key == 'f': #Move to Marker
+            aux=[-1.32599689924245,-1.00469765057985,-1.6422,1.2648,-1.7442]
             key=' '
-        elif key == 'h':
-            aux= point.positions = [0,0,-pi/2,0,0]
+        elif key == 'h': #move to Rest
+            aux= point.positions = [-1.32599689924245,-0.724198306509335,-1.6932,1.0098,-1.7442]
             key=' '
-        elif key == 'q': #pos 1 0 0 0 0 0
-            aux= point.positions = [0,0,0,0,0]
+        elif key == 'q': #Move to outer arc start
+            aux= point.positions = [-1.9482,-1.3362,-1.7442,1.6218,-1.7442]
             key=' '
-        elif key == 'w': #pos 2 -20 20 -20 20 0
-            aux= point.positions = [-20*pi/180,20*pi/180,-20*pi/180,20*pi/180,0]
+        elif key == 'w': #Move to outer arc end
+            aux= point.positions = [1.8258,-1.3362,-1.7442,1.6218,-1.7442]
             key=' '
         elif key == 'e': #pos 3 30 -30 30 -30 0
             aux= point.positions = [30*pi/180,-30*pi/180,30*pi/180,-30*pi/180,0]
@@ -39,6 +39,16 @@ def joint_publisher():
         elif key == 't': #pos 5 -90 45 -55 45 10
             aux= point.positions = [-90*pi/180,45*pi/180,-55*pi/180,45*pi/180,10*pi/180]
             key=' '
+        elif key == 'p': #close gripper:
+            aux=[-1.32599689924245,-1.00469765057985,-1.6422,1.2648,-1.7442]
+            key=' '
+        elif key == 'o': #open gripper:
+            aux=[-1.32599689924245,-1.00469765057985,-1.6422,1.2648,-1.1832]
+            key=' '
+
+
+
+
 
         point.positions = aux
         point.time_from_start = rospy.Duration(0.5)

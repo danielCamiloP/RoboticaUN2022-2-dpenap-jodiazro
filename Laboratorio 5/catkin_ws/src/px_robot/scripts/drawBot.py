@@ -34,6 +34,7 @@ def goRest():
     rospy.sleep(5)
 
 def takeMarker():
+    print("Taking marker")
     move(-1.4127,-0.3672,-1.8462,0.9078,loose) #Se mueve sobre el marcador
     rospy.sleep(3)
     move(-1.4127,-0.8517,-1.7952,1.2393,loose) #Se sitúa hacia el marcador
@@ -44,10 +45,15 @@ def takeMarker():
     rospy.sleep(2)
 
 def leaveMarker():
-    move(-1.4127,-0.3672,-1.8462,0.9078,grip) #Se mueve sobre el marcador
-    rospy.sleep(2)
-    move(-1.4127,-0.8517,-1.7952,1.2393,loose) #Se sitúa hacia el marcador
-    rospy.sleep(2)
+    print("Leaving marker")
+    move(-1.4127,-0.3672,-1.8462,0.9078,loose) #Se mueve sobre el marcador
+    rospy.sleep(3)
+    move(-1.4127,-0.3672,-1.8462,0.9078, loose)
+    rospy.sleep(3)
+    # move(-1.4127,-0.8517,-1.7952,1.2393,loose) #Se sitúa hacia el marcador
+    # rospy.sleep(3)
+    
+    
 
 def drawSpace():
     move(-1.9482,-1.0557,-2.0502,1.5708,grip) #Inner 1
@@ -56,14 +62,18 @@ def drawSpace():
     rospy.sleep(5)
     move(1.8258,-0.2142,-2.1012,0.8058,grip) #inner up
     rospy.sleep(5)
+    print("inner drawn")
     move(1.8258,-0.2142,-2.1012,0.8058,grip) #outer up 1
-    rospy.sleep(10)
+    rospy.sleep(5)
+    print("out up 1")
     move(1.4178,-1.7442,-0.2652,0.5253,grip) #Outer 1
     rospy.sleep(15)
+    print("out 1 ready")
     move(1.4433,-1.7646,-0.3162,0.4998,grip) #Outer2
     rospy.sleep(10)
-    move(1.4433,-1.7646,-0.3162,0.4998,grip) #Outer2 up
-    rospy.sleep(10)
+    print("out 2 drawn")
+    move(-1.4433,-1.7646,-0.3162,0.4998,grip) #Outer2 up
+    rospy.sleep(15)
     print("Space drawn")
 
 def drawParallelLines():
@@ -84,6 +94,7 @@ def drawParallelLines():
     
         for j in range(q.shape[1]):
             move(q[0,j],q[1,j],q[2,j],q[3,j],grip)
+            rospy.sleep(5)
     
 
 def drawInitials():
@@ -128,7 +139,7 @@ def drawInitials():
 
 def drawShapes():
     
-    x_tri = [264.641,230.000,230.000]
+    """ x_tri = [264.641,230.000,230.000]
     y_tri = [130.000,110.000,150.000]
     
     q_in = iKine(x_tri[0], y_tri[0],z_up,0)
@@ -155,8 +166,9 @@ def drawShapes():
     q = np.concatenate((q_in,q_draw1,q_draw2,q_draw3,q_draw4,q_in),axis=1)
     
     for i in range(q.shape[1]):
-        move(q[0,i],q[1,i],q[2,i],q[3,i],grip)
-    '''
+        move(q[0,i],q[1,i],q[2,i],q[3,i],grip) """
+    
+    
     x_circ = [262.576, 290.861]
     y_circ = [8.738,37.023]
     R = 20.1
@@ -170,7 +182,7 @@ def drawShapes():
     
     for i in range(q.shape[1]):
         move(q[0,i],q[1,i],q[2,i],q[3,i],grip)
-    '''
+    
     print("shapes drawn")
     
 def drawDots():
@@ -215,7 +227,7 @@ def drawSus():
         else:
             try:
                 q_draw = getQArc(n,R[i],x_out[i], y_out[i],x_out[np.mod(l_,i+1)], y_out[np.mod(l_,i+1)],z_down,CCW[i])
-            except:
+            except :
                 print(i)
         q = np.concatenate((q,q_draw),axis=1)
         
@@ -276,59 +288,61 @@ def mapAngle(analogVal):
 def joint_publisher():
     pub = rospy.Publisher('/joint_trajectory', JointTrajectory, queue_size=0)
     rospy.init_node('joint_publisher', anonymous=False)
-    while not rospy.is_shutdown():
+    grab = False
+    while not rospy.is_shutdown():        
+        
+        
         key=input()
 
         """ state = JointTrajectory()
         state.header.stamp = rospy.Time.now()
         state.joint_names = ["joint_1", "joint_2", "joint_3", "joint_4", "joint_5"]
         point = JointTrajectoryPoint() """
-        move(0,0,-pi/2,0,0) #gohome
-        rospy.sleep(4)
-        takeMarker()
-        goRest()
-        drawSpace()
-        drawParallelLines()
-        drawShapes()
-        goRest()
-        leaveMarker()
-        goRest()
-        rospy.sleep(5)
-        move(0,0,-pi/2,0,loose) #gohome
-        return
-
         
+        # rospy.sleep(4)
+        # takeMarker()
+        # goRest()
+        # drawSpace()
+        # drawParallelLines()
+        # drawShapes()
+        # goRest()
+        # leaveMarker()
+        # goRest()
+        # rospy.sleep(5)
+        # move(0,0,-pi/2,0,loose) #gohome      
         # drawInitials()
 
-        # if loaded:
-        #     if key == 'l':
-        #         if grab:
-        #             takeMarker()
-        #             grab = True
-        #         else:
-        #             leaveMarker()
-        #             grab = False
-        #         key=' '
-        #     elif key == 'q': #pos 1 0 0 0 0 0
-        #         #arco interno
-        #         move(-1.9482,-1.3362,-1.7442,1.6218,-1.7442)
-        #         move(1.8258,-1.3362,-1.7442,1.6218,-1.7442)
-        #         key=' '
-        #     elif key == 'w': #pos 2 -20 20 -20 20 0
-        #         drawInitials()
-        #         key=' '
-        #     elif key == 'e': #pos 3 30 -30 30 -30 0
-        #         drawShapes()
-        #         drawParallelLines()
-        #         key=' '
-        #     elif key == 'r': #pos 4 -90 15 -55 17 0
-        #         drawDots()
-        #         key=' '
-        #     elif key == 't': #pos 5 -90 45 -55 45 10
-        #         drawSus()
-        #         key=' '
-        # else:
-            #goRest()
+    
+        if key == 'l':
+            if not grab:
+                takeMarker()
+                grab = True
+            else:
+                leaveMarker()
+                grab = False
+            key=' '
+        elif key == 'q': #pos 1 0 0 0 0 0
+            drawSpace()
+            key=' '
+        elif key == 'w': #pos 2 -20 20 -20 20 0
+            drawInitials()
+            key=' '
+        elif key == 'e': #pos 3 30 -30 30 -30 0
+            drawParallelLines()
+            drawShapes()
+            key=' '
+        elif key == 'r': #pos 4 -90 15 -55 17 0
+            drawDots()
+            key=' '
+        elif key == 't': #pos 5 -90 45 -55 45 10
+            drawSus()
+            key=' '
+        elif key == 'h':
+            move(0,0,-pi/2,0,0) #gohome
+        else:
+            goRest()
+        print("Drawing executed")
+        goRest()
         '''point.positions = aux
         point.time_from_start = rospy.Duration(0.5)
         state.points.append(point)

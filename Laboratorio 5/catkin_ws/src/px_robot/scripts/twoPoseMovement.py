@@ -39,6 +39,9 @@ def joint_publisher():
         elif key == 't': #pos 5 -90 45 -55 45 10
             aux= point.positions = [-90*pi/180,45*pi/180,-55*pi/180,45*pi/180,10*pi/180]
             key=' '
+        elif key == 'z':
+            aux = [0, 0, 0, 0, 0]
+            key = ' '
         elif key == 'p': #close gripper:
             aux=[-1.32599689924245,-1.00469765057985,-1.6422,1.2648,-1.7442]
             key=' '
